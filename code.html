@@ -2,7 +2,7 @@
 <html lang="en" class="h-100">
 
 <head>
-    <title>App Name: A Coding Project by Malcolm Lovell</title>
+    <title>Cento: A Coding Project by Malcolm Lovell</title>
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -23,7 +23,7 @@
     <nav class="navbar navbar-expand-md navbar-dark fixed-top">
     <div class="container-fluid">
         <a class="navbar-brand" href="#">
-            <img src="img/FaceLogo.png" width="30" height="24" alt="Logo" class="d-inline-block align-text-top">APP NAME
+            <img src="img/FaceLogo.png" width="30" height="24" alt="Logo" class="d-inline-block align-text-top">Cento
         </a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse"
             aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
@@ -59,18 +59,72 @@
                    <div class="col-lg-8">
                     <pre class="line-numbers">
                         <code class="language-javascript">
-                            //Call Hello World
-                            function helloWorld() {
-                            alert("Hello World!");
+                            //Get values from the page
+                            function getValues(){
+                            let startValue = document.getElementById("startValue").value;
+                            let endValue = document.getElementById("endValue").value;
+                            
+                            startValue = parseInt(startValue);
+                            endValue = parseInt(endValue);
+                            
+                            if(Number.isInteger(startValue) && Number.isInteger(endValue)){
+                             
+                               let numbers = generateNumbers(startValue, endValue);  
+                                displayNumbers(numbers);
+                            
                             }
+                            else{
+                                alert("Error: Enter valid numbers");
+                            }
+                            }
+                            
+                            
+                            //Generate numbers from the start value to end value
+                            function generateNumbers(startValue, endValue) {
+                            let numbers = [];
+                            for(let i = startValue; i <= endValue; i++ ){
+                                numbers.push(i);
+                            }
+                            return numbers;
+                            }
+                            
+                            //Display the numbers and mark the even numbers bold
+                            function displayNumbers(numbers) {
+                            let templateRows = "";
+                            for (let i = 0; i < numbers.length; i++) {
+                                let className = "even";
+                                let number = numbers[i];
+                                if (number % 2 == 0){
+                                    className = "even";
+                                }
+                                else{
+                                    className = "odd";
+                                }
+                                templateRows += `<tr><td class=${className}>${number}</td></tr>`;
+                                document.getElementById("results").innerHTML = templateRows;
+                            }
+                            }
+                            
                         </code>
                     </pre>
                     
                    </div>
                    <div class="col-lg-4">
                         <p>The code is structured in open function.</p>
-                        <h5>Hello World</h5>
-                        <p>Hello World is a function that displays an alert with a message of "Hello World"</p>
+                        <h5>getValues()</h5>
+                        <p>getValues is a function that takes user input for the start and end values and parses 
+                            them to make sure they're integers. If not, an error message is displayed to user. 
+                            After validation, the generateNumbers() and displayNumbers() functions are called.
+                        </p>
+                        <h5>generateNumbers()</h5>
+                        <p>generateNumbers is a function that takes all the numbers from the start value to the
+                            end value and pushes them to an array.
+                        </p>
+                        <h5>displayNumbers()</h5>
+                        <p>displayNumbers is a function that checks each number in the array and determines whether
+                            it is even or odd. The numbers are then displayed to the user in table form where even
+                            numbers are bolded.
+                        </p>
                    </div>
                </div>
        </div>
